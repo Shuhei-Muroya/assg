@@ -1,0 +1,29 @@
+Package: assg
+Type: Package
+Title: automatically selection of setting values for glmnet
+Version: 0.1.0
+Author: Shuhei Muroya
+Maintainer: Shuhei Muroya <muroya.shuhei.697@s.kyushu-u.ac.jp>
+Description: More about what it does (maybe more than one line)
+    Use four spaces when indenting paragraphs within the Description.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Imports:
+    Rcpp,
+    RcppArmadillo,
+    stats,
+    utils,
+    dplyr,
+    ggplot2 (>= 3.5.1),
+    lars,
+    glmnet,
+    readr
+LinkingTo: 
+    Rcpp,
+    RcppArmadillo
+RoxygenNote: 7.3.2
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+Roxygen: list(markdown = TRUE)

@@ -1,0 +1,9 @@
+make_input<-function(X){
+  X<-as.matrix(X)
+  n<-nrow(X)
+  p<-ncol(X)
+  V<-cov(X)
+  eigen<-eigen(V)$values
+  vec<-c(n,p,head(eigen,5),tail(eigen,5))
+  return(vec)
+}
