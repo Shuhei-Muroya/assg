@@ -21,6 +21,15 @@ This is a basic example which shows you how to solve a common problem:
 
 ``` r
 library(assg)
-## basic example code
+
+## Import example data
+x_data <- get("x", envir = .myPackageEnv)
+y_data <- get("y", envir = .myPackageEnv)
+
+## Automatically select the setting values for glmnet
+auto_settingvalue(x_data,T_hope=20,size = 1000)
+
+## Automatically select the setting values and compute the lasso
+auto_lasso(y_data,x_data)
 ```
 
