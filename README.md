@@ -4,7 +4,9 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of assg is to ...
+The assg package automatically provides appropriate setting values for glmnet.
+It selects the appropriate setting values for glmnet based on the given data.
+Additionally, it can compare lars and glmnet in terms of computation time and choose the better package for the task.
 
 ## Installation
 
