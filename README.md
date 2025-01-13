@@ -13,8 +13,9 @@ Additionally, it can compare lars and glmnet in terms of computation time and ch
 You can install the development version of assg from [GitHub](https://github.com/) with:
 
 ``` r
-# install.packages("pak")
-pak::pak("Shuhei-Muroya/assg")
+# install.packages("devtools")
+library(devtools)
+devtools::install_github("Shuhei-Muroya/assg")
 ```
 
 ## Example
