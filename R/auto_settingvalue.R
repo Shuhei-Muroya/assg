@@ -17,10 +17,10 @@ auto_settingvalue <- function(X, size = 1000, T_hope = 20, seed=1,message = TRUE
   x_input <- make_input(X)
   x_input <- as.numeric(x_input)
   x_input_matrix <- matrix(rep(x_input, size), ncol = length(x_input), byrow = TRUE)
-
+  p<-ncol(X)
   # 追加の設定値
   set.seed(seed)
-  nlambda <- runif(size, 50, 1900)
+  nlambda <- runif(size, 100, 2*p)
   log_thresh <- runif(size, log(1e-9), log(1e-7))
   thresh <- exp(log_thresh)
   x_input_matrix <- cbind(x_input_matrix, nlambda, thresh)
