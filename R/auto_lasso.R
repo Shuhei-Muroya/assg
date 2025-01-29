@@ -107,13 +107,7 @@ auto_lasso<- function(y,X, new_x=NULL,size = 1000, T_hope = 20, seed=1,message =
     if(!is.null(new_x)){
       new_x<-as.matrix(new_x)
       prediction<-predict(glmnet_model,newx = new_x,s=cv_set$lambda.min)
-      result_list<-list(method=method,
-                        cv_lars=cvlars,
-                        lars_model=lars_model,
-                        best_step=beststep,
-                        coef_cv.min=coef,
-                        prediction_cv.min =prediction,
-                        settings=set_list)
+      result_list$prediction_cv.min<-prediction#add PREDICTION
     }
 
   }
