@@ -5,7 +5,7 @@
 #'
 #' @param X A numeric matrix or vector representing the input data.
 #' @param T_hope A numeric value representing the desired computation time threshold. Default is 20.
-#' @param message A logical value. If `FALSE`, additional messages will be displayed. Default is `TRUE`.
+#' @param message A logical value. If `TRUE`, messages will be displayed. Default is `TRUE`.
 #'
 #' @details The function takes an input dataset and processes it through a neural network model defined by specific weights and biases loaded from files. The network is designed to predict the computation time for the Lars model.
 #'

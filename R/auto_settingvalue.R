@@ -1,11 +1,11 @@
-#' Automatically Set glmnet Setting Parameters
+#' Automatically select setting values for glmnet
 #'
 #' This function uses a neural network model to find optimal `nlambda` and `thresh` parameters based on input data.
 #'
-#' @param X Numeric vector of input data.
-#' @param size Integer, number of samples to generate for optimization.
-#' @param T_hope Numeric, desired threshold time for computation.
-#' @param message Logical, whether to display result messages.
+#' @param X Input matrix.
+#' @param size Integer, number of samples to generate pareto front for optimization.
+#' @param T_hope A numeric value representing the desired computation time threshold. Default is 20.
+#' @param message A logical value. If `TRUE`, messages will be displayed. Default is `TRUE`.
 #'
 #' @return A list containing optimal `nlambda`, `thresh`, pareto front, and pareto data.
 #'
@@ -18,7 +18,8 @@ auto_settingvalue <- function(X, size = 1000, T_hope = 20, seed=1,message = TRUE
   x_input <- as.numeric(x_input)
   x_input_matrix <- matrix(rep(x_input, size), ncol = length(x_input), byrow = TRUE)
   p<-ncol(X)
-  # 追加の設定値
+
+  # random sampling of setting values
   set.seed(seed)
   nlambda <- runif(size, 100, 2*p)
   log_thresh <- runif(size, log(1e-9), log(1e-7))
@@ -37,11 +38,9 @@ auto_settingvalue <- function(X, size = 1000, T_hope = 20, seed=1,message = TRUE
 
   pareto_data <- result_return$data
   filtered_data <- subset(pareto_data, Pareto == 1 & Time <= T_hope)
-
-  # TimeがT_hope以下で'Coef_Accuracy' が最小の行を選ぶ
   min_accuracy_row <- filtered_data[which.min(filtered_data$Coef_Accuracy), ]
 
-  # 結果を表示
+  #result of setting values
   params_nlambda <- min_accuracy_row$params_nlambda
   params_thresh <- min_accuracy_row$params_thresh
 

@@ -40,19 +40,20 @@
 #' @export
 all_lasso<-function(X,y,nlambda=100,thresh=1e-7,seed=1){
   set.seed(seed)
-  y<-as.numeric(y)
   X<-as.matrix(X)
+  y<-as.numeric(y)
   p<-length(y)
 
+  #lars
   a<-Sys.time()
   cvlars_p<-cv.lars(X,y,plot.it = FALSE,type = "lasso" ,max.step=p,use.Gram=FALSE)
   lars.model_p<-lars(X,y,use.Gram=FALSE,type = "lasso",trace = FALSE)
   b<-Sys.time()
   time_lars<-b-a
   coef_p<-coef(lars.model_p,mode="lambda",s=cvlars_p$index[which.min(cvlars_p$cv)])
-
   lars_list<-list(cv_lars=cvlars_p,lars_model=lars.model_p,lars_coef.cvmin=coef_p)
-  #デフォルト
+
+  #glmnet default
   set.seed(seed)
   a<-Sys.time()
   cv_def<-cv.glmnet(X,y,family = "gaussian",alpha = 1)
@@ -61,25 +62,23 @@ all_lasso<-function(X,y,nlambda=100,thresh=1e-7,seed=1){
   time_def<-b-a
   coef_def<-coef(model_def,s=cv_def$lambda.min)
   def_list<-list(def_cv=cv_def,def_model=model_def,def_coef.cvmin=coef_def)
-  ##auto
+
+  #glmnet automatilcally select
   lam<-numeric()
-  #pl<-ncol(X)#増やすlambdaの数
   pl<-nlambda
   t<-thresh
-  minn<-min(model_def$lambda)####修正
+  minn<-min(model_def$lambda)
   len_model1_lambda<-length(model_def$lambda)
   model1_lambda<-model_def$lambda
-  #print(model1_lambda)
   if(pl==0){
     lam<-model1_lambda
   }else if(pl<len_model1_lambda){
-    add<-seq(minn,0,by=-(minn/(100-len_model1_lambda)))[-1]#100まで増やす必要ない。
-    #単に長さplにする
+    add<-seq(minn,0,by=-(minn/(100-len_model1_lambda)))[-1]
     add<-seq(minn,0,length.out=pl)#[-1]
-    lam<-add##ここの修正
+    lam<-add
   }else{
-    add<-seq(minn,0,by=-(minn/(pl-len_model1_lambda)))[-1]#続きを増やしている。
-    lam<-c(model1_lambda,add)#増やしたlambdaの候補
+    add<-seq(minn,0,by=-(minn/(pl-len_model1_lambda)))[-1]
+    lam<-c(model1_lambda,add)
   }
 
   pl_l<-length(lam)

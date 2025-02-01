@@ -20,7 +20,7 @@ devtools::install_github("Shuhei-Muroya/assg")
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
+This is a basic example :
 
 ``` r
 library(assg)
@@ -33,6 +33,6 @@ y_data <- get("y", envir = .myPackageEnv)
 auto_settingvalue(x_data,T_hope=20,size = 1000)
 
 ## Automatically select the setting values and compute the lasso
-auto_lasso(y_data,x_data)
+auto_lasso(x_data,y_data)
 ```
 

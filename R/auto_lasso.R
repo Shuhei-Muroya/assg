@@ -4,8 +4,8 @@
 #' depending on the specified computation time threshold (`T_hope`). It selects the best
 #' model based on cross-validation and can optionally make predictions on new data.
 #'
-#' @param y A numeric vector representing the response variable.
-#' @param X A matrix or data frame representing the predictor variables.
+#' @param X A matrix or data frame of predictor variables.
+#' @param y A numeric vector of response variables.
 #' @param new_x Optional. A matrix or data frame for prediction. If provided, predictions will be made for `new_x`.
 #' @param size An integer specifying the number of samples for the GLMNET lambda search. Default is 1000.
 #' @param T_hope A numeric value specifying the computation time threshold to decide between LARS and GLMNET. Default is 20.
@@ -33,7 +33,7 @@
 #' @import glmnet
 #' @import lars
 #' @export
-auto_lasso<- function(y,X, new_x=NULL,size = 1000, T_hope = 20, seed=1,message = TRUE,line=TRUE) {
+auto_lasso<- function(X,y, new_x=NULL,size = 1000, T_hope = 20, seed=1,message = TRUE,line=TRUE) {
   X<-as.matrix(X)
   y<-as.numeric(y)
   lars_time<-forecast_lars_cptime(X=X,T_hope=T_hope,message=message)
