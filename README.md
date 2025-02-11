@@ -4,8 +4,8 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-The assg package automatically provides appropriate setting values for glmnet.
-It selects the appropriate setting values for glmnet based on the given data.
+The assg package automatically provides appropriate hyperparameters for glmnet function.
+It selects the appropriate hyperparameters for glmnet based on the given data.
 Additionally, it can compare lars and glmnet in terms of computation time and choose the better package for the task.
 
 ## Installation
@@ -29,10 +29,10 @@ library(assg)
 x_data <- get("x", envir = .myPackageEnv)
 y_data <- get("y", envir = .myPackageEnv)
 
-## Automatically select the setting values for glmnet
+## Automatically select the hyperparameters for glmnet
 auto_settingvalue(x_data,T_hope=20,size = 1000)
 
-## Automatically select the setting values and compute the lasso
+## Automatically select the hyperparameters and compute the lasso
 auto_lasso(x_data,y_data)
 ```
 

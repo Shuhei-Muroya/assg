@@ -1,4 +1,4 @@
-#' Automatically select setting values for glmnet
+#' Automatically select hyperparameters for glmnet
 #'
 #' This function uses a neural network model to find optimal `nlambda` and `thresh` parameters based on input data.
 #'
@@ -19,7 +19,7 @@ auto_settingvalue <- function(X, size = 1000, T_hope = 20, seed=1,message = TRUE
   x_input_matrix <- matrix(rep(x_input, size), ncol = length(x_input), byrow = TRUE)
   p<-ncol(X)
 
-  # random sampling of setting values
+  # random sampling of hyperparameters for glmnet
   set.seed(seed)
   nlambda <- runif(size, 100, 2*p)
   log_thresh <- runif(size, log(1e-9), log(1e-7))
@@ -54,6 +54,6 @@ auto_settingvalue <- function(X, size = 1000, T_hope = 20, seed=1,message = TRUE
     thresh = params_thresh
   )
 
-  result_list <- list(setting_value = setting_value, pareto_front = result_return$pareto_front, pareto_data = pareto_data)
+  result_list <- list(hyperparameters = setting_value, pareto_front = result_return$pareto_front, pareto_data = pareto_data)
   return(result_list)
 }
